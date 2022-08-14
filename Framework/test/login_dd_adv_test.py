@@ -8,8 +8,9 @@ import pytest
 from Framework.pages.login_page import LoginPage
 from Framework.utils import excel_utils
 
-# Read data and implementing in test
 
+# Read data and implementing in test
+# Write data in Excel
 
 class LoginTest(unittest.TestCase):
 
@@ -21,7 +22,8 @@ class LoginTest(unittest.TestCase):
         time.sleep(3)
 
         # Excel Implement
-        file = "E:\\BITM_Online_14\\Projects\\TestAutomationBITM14\\Framework\\data\\login_data.xlsx"
+        file = "F:\\Training\\PeopleNTech\\BITM Online " \
+               "14\\Projects\\TestAutomationBITM14\\Framework\\data\\login_data.xlsx"
         sheet = "Sheet1"
 
         number_of_rows = excel_utils.get_row_count(file, sheet)
@@ -32,5 +34,10 @@ class LoginTest(unittest.TestCase):
 
             lp = LoginPage(driver)
             lp.login_orange(username_data, password_data)
+
+            if driver.current_url == "https://opensource-demo.orangehrmlive.com/index.php/dashboard":
+                excel_utils.writing_data(file, sheet, r, 4, "Login")
+            else:
+                excel_utils.writing_data(file, sheet, r, 4, "Not Login")
 
         driver.close()

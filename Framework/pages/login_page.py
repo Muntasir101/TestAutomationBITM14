@@ -22,3 +22,4 @@ class LoginPage():
         time.sleep(2)
 
         login_button.click()
+        time.sleep(4)
